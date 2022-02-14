@@ -1,0 +1,66 @@
+@model IEnumerable<Proyecto.Models.Permiso> 
+
+@{
+    ViewData["Title"] = "Solicitud Permiso";
+}
+<html>
+<head>
+	<title>Permisos</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="~/css/site2.css">
+</head>
+<body>
+    
+    <h1 class="letraBlanco">Solicitud de Permiso</h1>
+
+    <div class="cuadroTabla">
+        <table>
+             <thead class="cabezaTabla">
+                    <tr>
+                        <td>Fecha de inicio</td>
+                        <td>Fecha de termino</td>
+                        <td>Tipo de permiso</td>
+                        <td>Docente</td>
+                        @* <td>Nomina</td> *@
+                        <td>Acciones</td>
+                    </tr>
+            </thead>
+            <tbody>
+                @if(Model.Count() > 0){
+                    @foreach (var item in Model)
+                    {
+                        if(item.Valido == false){
+                            <tr>
+                                <td>@item.Inicio.ToString("dd-MM-yyyy")</td>
+                                <td>@item.Termino.ToString("dd-MM-yyyy")</td>
+                                @switch (item.Id_Tipo)
+                                {
+                                    case 1: <td>Dos horas - @item.Horario</td> break;
+                                    case 2: <td>Economico</td> break;
+                                    case 3: <td>Cumpleaños</td> break;
+                                }
+                                @* <td><a asp-controller="DatosDocente" asp-action="DatosDocente" asp-route-id="@item.Id_Docente">Nombre del maestro</a></td> *@
+                                @foreach (var docente in ViewBag.listaDocentes)
+                                {
+                                    if(docente.Nomina == item.Id_Docente){
+                                        <td>@docente.Nombre @docente.Apellido_Paterno @docente.Apellido_Materno</td>
+                                    }
+                                }
+                                @* <td>@item.Id_Permiso</td> *@
+                                <td>
+                                    <a asp-controller="AceptarPermisos" asp-action="AceptarPermiso" asp-route-id="@item.Id_Permiso"class="btnAceptar">Aceptar</a>
+                                    <a asp-controller="AceptarPermisos" asp-action="DenegarPermiso" asp-route-id="@item.Id_Permiso"class="btnDenegar">Denegar</a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                }else{
+                    <p>No hay solicitudes pendientes</p>
+                }
+
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>

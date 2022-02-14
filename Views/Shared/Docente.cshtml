@@ -1,0 +1,100 @@
+@model Proyecto.Models.Permiso
+
+@{
+    ViewData["Title"] = "Vista Docente";
+}
+<html>
+<head>
+	<title>Docente</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="~/css/site2.css">
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</head>
+<body>
+	<div class="bodyMargin">
+		@if (TempData["PermisoValido"] != null){
+		<script>
+			swal("Permiso Valido", "Permiso Enviado", "success");
+		</script>
+		}
+
+        
+		<div class="cabezaDocente">
+			<h2 class="letraBlanco">Lista de Permisos</h2>
+				<div class="contBotones">
+					@if (ViewBag.coordi == true)
+					{
+						<form method="post">
+								<input asp-controller="AceptarPermisos" asp-action="AceptarPermisos" asp-route-id="@ViewBag.id" type="submit" name="solicitud-permiso" value="Solicitudes de Permiso" class="btnCabezaDocente">
+						</form> 
+						<form method="post">
+								<input asp-controller="Reporteo" asp-action="Reporteo" asp-route-id="@ViewBag.id" type="submit" name="GraficaDocentes" value="Grafica Docentes" class="btnCabezaDocente">
+						</form> 
+					}
+					<form method="post">
+						<input asp-controller="SolicitarPermiso" asp-action="SolicitarInicio" asp-route-id="@ViewBag.id" type="submit" name="Solicitar" value="Solicitar" class="btnCabezaDocente">
+					</form>
+					<form method="post">
+						<input asp-controller="ReporteoDocente" asp-action="ReporteoDocente"  asp-route-id="@ViewBag.id" type="submit" name="Solicitar" value="Mis Graficas" class="btnCabezaDocente">
+					</form>
+				</div>
+ 
+        </div>
+		
+
+		@if (true)
+        {
+			<div class="cuadroTabla">
+				<table>
+					<thead class="cabezaTabla">
+						<tr>
+							<td>Tipo de permiso</td>
+							<td>Fecha de inicio</td>
+							<td>Fecha de termino</td>
+							<td>Estado</td>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach (var item in ViewBag.listaPermisos)
+						{
+							if(item.Id_Docente == ViewBag.id){
+								<tr>
+									@switch (item.Id_Tipo)
+									{
+										case 1: <td>Dos Horas - @item.Horario</td> break;
+										case 2: <td>Economico</td> break;
+										case 3: <td>Cumpleaños</td> break;
+									}
+									
+									<td>@item.Inicio.ToString("dd-MM-yyyy")</td>
+									<td>@item.Termino.ToString("dd-MM-yyyy")</td>
+									@if(item.Valido == false){
+										<td class="enProceso"><b>En proceso</b></td>
+									}else{
+										@* @if(item.Termino < DateTime.Today){
+											<td class="aceptadoAntiguo"><b>Ya pasada</b></td>
+										}else{ *@
+											<td class="aceptadoNuevo"><b>Aceptada</b></td>
+										@* } *@
+									}
+								</tr>
+							}
+						}					
+				</tbody>
+				</table>  
+			</div>
+                      
+        }else{
+            <p>No hay permisos anteriores</p>
+        }
+
+    </div> 
+
+</body>
+</html>
+
+
+
+@section Scripts{
+	@{ <partial name = "_ValidationScriptsPartial" />}
+}

@@ -1,0 +1,128 @@
+html{
+    background: rgb(37, 36, 36);
+    /* background: rgba(0, 0, 0, 0); */
+}
+
+.letraBlanco{
+	color: rgb(255, 255, 255);	
+}
+
+tr td{
+	border: 1px solid black;
+	padding: 8px;
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+	text-align: center;
+}
+
+.cabezaDocente{
+    display: flex;
+    text-align: center;
+    align-items: center;
+    font-size: 22;
+}
+	.contBotones{
+		margin-left: 500px;
+		display: flex;
+    	align-items: center;
+	}
+		.btnCabezaDocente{
+			margin-left: 10px;
+			background: rgb(101, 185, 157);
+			color: black;
+			font-size: 18px;
+		}
+			.btnCabezaDocente:hover{
+				background: rgb(29, 92, 71);
+				color: azure;
+			}
+
+
+.cuadroTabla{
+	background-color: #ededed;
+	padding: 1px;
+	min-height: min-content;
+	min-width: min-content;
+}
+	.cabezaTabla{
+		background: #8b8b8b;
+		font-size: 20px;
+		font-family: 'Courier New', Courier, monospace;
+		font-weight: bold;
+	}
+
+
+.formType1 {
+    border-radius: 2em;
+	padding: 25px 16px;
+	background-color: #ededed;
+	margin: calc(25% + 80px);
+	margin-top: 50px;
+	margin-bottom: 26px;
+    text-align: center;
+}
+
+.inputForm {
+	font-size: 18px;	
+	width: calc(80% - 20px);
+	height: 40px;
+	margin: 0 10%;
+	margin-top: 4px;
+	margin-bottom: 12px;
+	color: rgb(114, 114, 114);
+	border: none;
+	text-align: center;
+}
+	.btnTexto{
+		color: #000;
+	}
+
+
+.izqform{
+	margin: 5px 0px 0px 48px;
+}
+
+
+
+.btnSolicitud{
+    background: rgb(101, 185, 157);
+    color: white;
+    /* font-size: 20px; */
+}
+    .btnSolicitud:hover{
+        background: rgb(29, 92, 71);
+        color: azure;
+    }
+
+
+	.btnSolicitarDocente{
+		height: 100%;
+		width: 100px;
+	}
+
+
+.btnAceptar{
+	text-decoration: none;
+	color: black;
+	background: rgb(61, 155, 61);
+	border-radius: 2em;
+	padding: 6px;
+}
+	.btnAceptar:hover{
+		background: rgb(43, 121, 43);
+	}
+
+.btnDenegar{
+	padding: 6px;
+	text-decoration: none;
+	color: black;
+	background: rgb(196, 50, 50);
+	border-radius: 2em;
+}
+	.btnDenegar:hover{
+		background: rgb(170, 39, 39);
+	}
+

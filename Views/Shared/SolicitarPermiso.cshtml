@@ -1,0 +1,73 @@
+@model Proyecto.Models.Permiso
+
+@{
+    ViewData["Title"] = "Vista Docente";
+}
+<html>
+<head>
+	<title>Docente</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="~/css/site2.css">
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</head>
+<body>
+
+		@if (TempData["error"] != null){
+		<script>
+			swal("Permiso no valido", "Vuelva a intentarlo", "error");
+		</script>
+		}
+
+		@* @if (TempData["PermisoValido"] != null){
+		<script>
+			swal("Permiso Valido", "Permiso Enviado", "success");
+		</script>
+		} *@
+
+
+	
+        
+		<div>
+			<form method="post" class="formType1" asp-controller="SolicitarPermiso" asp-action="SolicitarPermiso" asp-route-id="@ViewBag.id">
+				<div class="permisoForm bottomMargin">
+					<div asp-validation-summary="ModelOnly"></div>
+					<h2>Solicita un permiso</h2>
+					<div class="permisoFormBorde">
+
+						<p>Tipo de permiso</p>
+						<select asp-for="Id_Tipo" name="tipoPermiso" id="tipo-permiso" class="inputForm">
+							<option value="1">Dos horas</option>
+							<option value="2">Económico</option>
+							<option value="3">Cumpleaños</option>
+						</select>
+
+						<p>Horario (en caso de que sea 2 horas)</p>
+						<select asp-for="Horario" name="horario" id="Horario" class="inputForm">
+							<option value="Mañana">7:00 - 9:00</option>
+							<option value="Tarde">13:00 - 15:00</option>
+						</select>
+
+						<p>Fecha de Inicio</p>
+						<input type="date" asp-for="Inicio" class="inputForm">
+						<span asp-validation-for="Inicio" class="text-danger izqform"></span><br>
+
+						<p>Fecha de termino</p>
+						<input type="date" asp-for="Termino" class="inputForm">
+						<span asp-validation-for="Termino" class="text-danger izqform"></span><br>
+						
+					</div>
+				</div>
+				<div class="btnsPermisoForm">
+					<input  type="submit" value="Solicitar" class="inputForm btnSolicitud">
+				</div>
+			</form>
+        </div>
+
+</body>
+</html>
+
+
+
+@section Scripts{
+	@{ <partial name = "_ValidationScriptsPartial" />}
+}

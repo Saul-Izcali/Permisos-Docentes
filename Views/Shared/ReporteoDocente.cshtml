@@ -1,0 +1,39 @@
+@{
+
+}
+
+<html style="background: rgb(37, 36, 36);">
+<head>
+	<title>Graficas</title>
+	<meta charset="utf-8">
+	@* <link rel="stylesheet" type="text/css" href="~/css/site2.css"> *@
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Task', 'Hours per Day'],
+          ['2 Horas',     @ViewBag.doshoras],
+          ['Economicos',      @ViewBag.economico],
+          ['Cumpleaños',  @ViewBag.cumpleaños],
+        ]);
+
+        var options = {
+          title: 'Permisos este año'
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+      }
+    </script>
+
+</head>
+<body style="align-items: center; text-align: center; margin: calc(1% + 8px) calc(16%);">
+    <div id="piechart" style="width: 900px; height: 500px; background:#ededed;"></div>
+
+</body>
+</html>

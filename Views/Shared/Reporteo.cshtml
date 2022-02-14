@@ -1,0 +1,63 @@
+<html style="background: rgb(37, 36, 36);">
+  <head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['bar']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        let myJsVariable = '@ViewBag.DatosBarra';
+        let cadena = myJsVariable.replaceAll('&#x27;',""); 
+        let x = cadena.split(",ppp");
+        let prueba = [];
+
+        for (var i = 0; i < x.length; ++i){
+            prueba[i] = x[i].split(",");
+        }
+        
+        for(let i = 0; i < prueba.length; i++){ // recorre todo el array grande
+          for(let j = 0; j < prueba[i].length; j++){ // recorre cada elemento de los subarrays
+              prueba[i][j] = prueba[i][j].replaceAll('[',""); 
+              prueba[i][j] = prueba[i][j].replaceAll(']',""); 
+          }
+        }
+        
+        for(let i = 0; i < prueba.length; i++){ // recorre todo el array grande
+          for(let j = 0; j < prueba[i].length; j++){ // recorre cada elemento de los subarrays
+            if(j != 0 && i != 0){
+              prueba[i][j] = parseInt(prueba[i][j], 10);
+            }
+          }
+        }
+        prueba.pop();
+        console.log(prueba);
+
+        var data = google.visualization.arrayToDataTable(prueba);
+
+
+        @* console.log([
+        ['Docentes', '2 horas', 'Economicos', 'Cumpleaños'],
+          ['Juan', 12, 1, 1],
+          ['Pepe', 1, 3, 1],
+          ['Sofia', 3, 3, 0],
+          ['Laura', 5, 6, 0],
+          ]);  *@
+ 
+
+        var options = {
+          chart: {
+            title: 'Permisos de los docentes de la carrera',
+            subtitle: '',
+          }
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+      }
+    </script>
+  </head>
+  <body style="align-items: center; text-align: center; margin: calc(1% + 8px) calc(16%);">
+    <div id="columnchart_material"  style="width: 900px; height: 500px; background:#ededed;"></div>
+  </body>
+</html>
